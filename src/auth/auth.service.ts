@@ -23,7 +23,7 @@ export class AuthService {
     return null;
   }
   createHash(str: string): string {
-    return createHash('sha256').update(str).digest('hex');
+    return createHash('md5').update(str).digest('hex');
   }
   async login(user: any) {
     const payload = { email: user.email, sub: user.userId };
