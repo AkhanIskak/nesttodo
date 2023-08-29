@@ -2,7 +2,7 @@ import { IUser } from "../entitites/user.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { Exclude, Expose, Transform } from "class-transformer";
 import { IsEmail, IsString } from "class-validator";
-import {ObjectId} from "typeorm";
+import { ObjectId } from "typeorm";
 
 export class CreateUserDto implements IUser {
   @IsEmail()

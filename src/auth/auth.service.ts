@@ -3,7 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { createHash } from "node:crypto";
 import token from "../config/auth.config";
 import { InjectRepository } from "@nestjs/typeorm";
-import {IUser, User} from "../entitites/user.entity";
+import { IUser, User } from "../entitites/user.entity";
 import { Repository } from "typeorm";
 
 @Injectable()

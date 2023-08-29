@@ -47,6 +47,6 @@ export class User implements IUser {
   @Column({ nullable: true })
   refreshToken: string;
 
-  @Column((type) => TodoEntity)
+  @OneToMany(() => TodoEntity, (todo) => todo.user)
   todo: TodoEntity[];
 }

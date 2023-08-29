@@ -3,7 +3,7 @@ import { IsString } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 import { Transform } from "class-transformer";
 
-export class CreateTodo implements ITodo {
+export class CreateTodo implements Partial<ITodo> {
   @ApiProperty()
   @IsString()
   description: string;
@@ -13,4 +13,14 @@ export class CreateTodo implements ITodo {
 
   @Transform(() => Math.floor(Date.now() / 1000))
   createdAt: number;
+}
+export class TodoResponse implements Partial<ITodo> {
+  @ApiProperty()
+  description: string;
+  @ApiProperty({ description: "Unix timestamp" })
+  finishedAt: number;
+  @ApiProperty({ description: "Unix timestamp" })
+  createdAt: number;
+  @ApiProperty()
+  name: string;
 }

@@ -28,8 +28,8 @@ export class TodoService {
     const user = await this.userRepo.findOne({
       where: { _id: new ObjectId(userId) },
     });
-    if (!user) throw new HttpException("User does not exist", 401);
-    user.todo ? user.todo.push(todo) : (user.todo = [todo]);
+    if (!user) throw new HttpException("User does not exist", 404);
+    user.todo ? user.todo.push(<TodoEntity>todo) : (user.todo = [<TodoEntity>todo]);
     await this.userRepo.save(user);
     return todo;
   }
