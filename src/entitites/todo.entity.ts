@@ -12,7 +12,7 @@ export class TodoEntity implements ITodo {
   @Column({ type: "string" })
   description: string;
   //Unix timestamp
-  @Column({ default: Math.floor(Date.now() / 1000) }) // This sets the default value to the current timestamp
+  @Column() // This sets the default value to the current timestamp
   createdAt?: number;
   //Unix time
   @Column() // This sets the default value to the current timestamp

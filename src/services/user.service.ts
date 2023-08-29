@@ -4,7 +4,7 @@ import { User } from "../entitites/user.entity";
 import { Repository } from "typeorm";
 import { InjectConfig } from "nestjs-config";
 import { AuthService } from "../auth/auth.service";
-import { AccessRefreshResponse } from "../dtos/accessRefresh.dto";
+import { AccessRefreshResponse } from "../dtos/accessToken.dto";
 
 @Injectable()
 export class UserService {

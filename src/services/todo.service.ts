@@ -17,14 +17,14 @@ export class TodoService {
     private userRepo: Repository<User>
   ) {}
   async list(userId: string) {
-    console.log(userId)
-    const data = await this.userRepo.findOne({
+    const { todo } = await this.userRepo.findOne({
+      select: ["todo"],
       where: { _id: new ObjectId(userId) },
     });
-    console.log(data);
-    return data;
+    return todo;
   }
   async create(userId: string, todo: ITodo): Promise<ITodo> {
+    todo.createdAt = Math.floor(Date.now());
     const user = await this.userRepo.findOne({
       where: { _id: new ObjectId(userId) },
     });

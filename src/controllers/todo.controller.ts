@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { ApiBearerAuth, ApiBody } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiResponse } from "@nestjs/swagger";
 import { CreateTodo } from "../dtos/todo";
 import { TodoService } from "../services/todo.service";
+import { ITodo, TodoEntity } from "../entitites/todo.entity";
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @Controller("/todo")
@@ -11,12 +12,11 @@ export class TodoController {
   @Post()
   @ApiBody({ type: CreateTodo })
   createTodo(@Req() req, @Body() body: CreateTodo) {
-    console.log(req.user.userId);
     return this.todoService.create(req.user.userId, body);
   }
   @Get()
-  getTodo(@Req() { user }) {
-    console.log(user);
+  @ApiResponse({ type: TodoEntity, isArray: true })
+  getTodo(@Req() { user }): Promise<ITodo[]> {
     return this.todoService.list(user.userId);
   }
 }
