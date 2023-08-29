@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, ObjectId, ObjectIdColumn} from "typeorm";
+import { Column, Entity, ManyToOne, ObjectId, ObjectIdColumn } from "typeorm";
 import { User } from "./user.entity";
 
 export interface ITodo {
