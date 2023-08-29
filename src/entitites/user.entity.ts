@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 export interface IUser {
-  id?: number;
+  id?: string;
   name: string;
   surname: string;
   email: string;
@@ -12,10 +12,10 @@ export interface IUser {
   emailConfirmed?: boolean;
   refreshToken?: string;
 }
-@Entity('users')
+@Entity("users")
 export class User implements IUser {
-  @PrimaryGeneratedColumn({ unsigned: true })
-  id: number;
+  @PrimaryGeneratedColumn()
+  id: string;
 
   @Column()
   name: string;

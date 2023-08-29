@@ -1,13 +1,13 @@
-import { forwardRef, Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { UserModule } from '../modules/user.module';
-import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from './local.strategy';
-import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './jwt.strategy';
-import config from '../config/auth.config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '../entitites/user.entity';
+import { forwardRef, Module } from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { UserModule } from "../modules/user.module";
+import { PassportModule } from "@nestjs/passport";
+import { LocalStrategy } from "./local.strategy";
+import { JwtModule } from "@nestjs/jwt";
+import { JwtStrategy } from "./jwt.strategy";
+import config from "../config/auth.config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { User } from "../entitites/user.entity";
 
 @Module({
   imports: [

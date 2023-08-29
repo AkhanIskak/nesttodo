@@ -1,17 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { createHash } from 'node:crypto';
-import token from '../config/auth.config';
-import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../entitites/user.entity';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { createHash } from "node:crypto";
+import token from "../config/auth.config";
+import { InjectRepository } from "@nestjs/typeorm";
+import { User } from "../entitites/user.entity";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
     @InjectRepository(User)
-    private userRepo: Repository<User>,
+    private userRepo: Repository<User>
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
@@ -23,7 +23,7 @@ export class AuthService {
     return null;
   }
   createHash(str: string): string {
-    return createHash('md5').update(str).digest('hex');
+    return createHash("md5").update(str).digest("hex");
   }
   async login(user: any) {
     const payload = { email: user.email, sub: user.userId };

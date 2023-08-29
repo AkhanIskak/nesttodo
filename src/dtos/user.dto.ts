@@ -1,7 +1,7 @@
-import { IUser } from '../entitites/user.entity';
-import { ApiProperty } from '@nestjs/swagger';
-import { Exclude, Expose } from 'class-transformer';
-import { IsEmail, IsString } from 'class-validator';
+import { IUser } from "../entitites/user.entity";
+import { ApiProperty } from "@nestjs/swagger";
+import { Exclude, Expose } from "class-transformer";
+import { IsEmail, IsString } from "class-validator";
 
 export class CreateUserDto implements IUser {
   @IsEmail()
@@ -30,7 +30,7 @@ export class LoginUserDto {
 export class LoginResponse {
   @ApiProperty({
     description:
-      'Полученный токен дальше нужно вставлять в хедер Authorization:Bearer ACCESS_TOKEN',
+      "Полученный токен дальше нужно вставлять в хедер Authorization:Bearer ACCESS_TOKEN",
   })
   accessToken: string;
 }
@@ -43,7 +43,7 @@ export class ConfirmEmailDto {
 export class UserResponse implements IUser {
   @Expose()
   @ApiProperty()
-  id: number;
+  id: string;
   @Expose()
   @ApiProperty()
   email: string;
