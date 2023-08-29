@@ -15,7 +15,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       throw new HttpException("Email or password is wrong", 401);
     }
     return {
-      userId: user.id,
+      userId: user._id,
       email: user.email,
     };
   }

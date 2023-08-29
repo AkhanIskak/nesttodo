@@ -1,22 +1,24 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity } from "typeorm";
 
 export interface ITodo {
-  id: string;
   name: string;
   description: string;
-  createdAt: number;
-  finishedAt: number;
+  createdAt?: number;
+  finishedAt?: number;
 }
-@Entity()
 export class TodoEntity implements ITodo {
-  @PrimaryGeneratedColumn()
-  id: string;
   @Column({ type: "string" })
   name: string;
   @Column({ type: "string" })
   description: string;
-  @Column({ type: "number" })
-  createdAt: number;
-  @Column({ type: "number" })
-  finishedAt: number;
+  //Unix timestamp
+  @Column({ default: Math.floor(Date.now() / 1000) }) // This sets the default value to the current timestamp
+  createdAt?: number;
+  //Unix time
+  @Column() // This sets the default value to the current timestamp
+  finishedAt?: number;
+  constructor(name: string, description: string) {
+    this.name = name;
+    this.description = description;
+  }
 }

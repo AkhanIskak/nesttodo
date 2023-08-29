@@ -4,9 +4,6 @@ import { Exclude, Expose } from "class-transformer";
 export class AccessRefreshResponse {
   @Expose()
   accessToken: string;
-  @Expose()
-  refreshToken: string;
-
   constructor(partial: Partial<any>) {
     Object.assign(this, partial);
   }

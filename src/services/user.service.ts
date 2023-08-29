@@ -17,7 +17,6 @@ export class UserService {
 
   async register(user) {
     user.password = this.authServ.createHash(user.password);
-    user.emailConfirmationCode = Number(this.createRandom());
     const dublicate = await this.usrRepo.findOne({
       where: { email: user.email },
     });
@@ -28,19 +27,7 @@ export class UserService {
         email: user.email,
         sub: user.id,
       }),
-      refreshToken: await this.authServ.createRefreshToken({
-        email: user.email,
-        sub: user.id,
-      }),
     });
-  }
-  createRandom(size = 6): string {
-    let result = "";
-    for (let i = 0; i < size; i++) {
-      const digit = Math.floor(Math.random() * 10);
-      result += digit;
-    }
-    return result;
   }
   whoiam(email: string) {
     return this.usrRepo.findOne({ where: { email } });

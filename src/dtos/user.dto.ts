@@ -1,7 +1,8 @@
 import { IUser } from "../entitites/user.entity";
 import { ApiProperty } from "@nestjs/swagger";
-import { Exclude, Expose } from "class-transformer";
+import { Exclude, Expose, Transform } from "class-transformer";
 import { IsEmail, IsString } from "class-validator";
+import {ObjectId} from "typeorm";
 
 export class CreateUserDto implements IUser {
   @IsEmail()
@@ -43,7 +44,8 @@ export class ConfirmEmailDto {
 export class UserResponse implements IUser {
   @Expose()
   @ApiProperty()
-  id: string;
+  @Transform((value) => value.toString(), { toPlainOnly: true })
+  id: ObjectId;
   @Expose()
   @ApiProperty()
   email: string;

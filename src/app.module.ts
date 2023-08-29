@@ -4,6 +4,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import * as path from "path";
 import { UserModule } from "./modules/user.module";
 import { AuthModule } from "./auth/auth.module";
+import { TodoModule } from "./modules/todo.module";
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AuthModule } from "./auth/auth.module";
       },
       inject: [ConfigService],
     }),
+    TodoModule,
     UserModule,
     AuthModule,
   ],

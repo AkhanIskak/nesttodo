@@ -1,12 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ObjectIdColumn, OneToMany, ObjectId } from "typeorm";
+import { TodoEntity } from "./todo.entity";
 
 export interface IUser {
-  id?: string;
+  _id?: ObjectId;
   name: string;
   surname: string;
   email: string;
   created_at?: number;
-  password: string;
+  password?: string;
   emailConfirmationCode?: number;
   blocked?: boolean;
   emailConfirmed?: boolean;
@@ -14,8 +15,8 @@ export interface IUser {
 }
 @Entity("users")
 export class User implements IUser {
-  @PrimaryGeneratedColumn()
-  id: string;
+  @ObjectIdColumn()
+  _id: ObjectId;
 
   @Column()
   name: string;
@@ -45,4 +46,7 @@ export class User implements IUser {
 
   @Column({ nullable: true })
   refreshToken: string;
+
+  @Column((type) => TodoEntity)
+  todo: TodoEntity[];
 }
