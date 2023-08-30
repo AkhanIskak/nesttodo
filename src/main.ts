@@ -4,7 +4,7 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
 import * as dotenv from "dotenv";
 import * as process from "process";
-import setTimeout = jest.setTimeout;
+
 dotenv.config();
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule, {

@@ -9,7 +9,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
-import { ConfirmEmailDto, CreateUserDto } from "../dtos/user.dto";
+import { CreateUserDto } from "../dtos/user.dto";
 import { UserService } from "../services/user.service";
 import { LocalAuthGuard } from "../auth/local-auth.guard";
 import { AuthService } from "../auth/auth.service";

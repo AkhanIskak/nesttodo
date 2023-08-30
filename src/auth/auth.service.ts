@@ -17,8 +17,7 @@ export class AuthService {
   async validateUser(email: string, pass: string): Promise<IUser> {
     const user = await this.userRepo.findOne({ where: { email } });
     if (user && user.password === this.createHash(pass)) {
-      const { password, ...result } = user;
-      return result;
+      return user;
     }
     return null;
   }

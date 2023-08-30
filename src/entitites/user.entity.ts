@@ -1,5 +1,4 @@
-import { Column, Entity, ObjectIdColumn, OneToMany, ObjectId } from "typeorm";
-import { TodoEntity } from "./todo.entity";
+import { Column, Entity, ObjectIdColumn, ObjectId } from "typeorm";
 
 export interface IUser {
   id?: ObjectId;

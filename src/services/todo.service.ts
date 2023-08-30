@@ -1,10 +1,8 @@
-import { HttpException, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { ITodo, TodoEntity } from "../entitites/todo.entity";
-import { InjectDataSource, InjectRepository } from "@nestjs/typeorm";
-import { DataSource, MongoRepository, Repository } from "typeorm";
-import { ObjectId } from "mongodb";
-import { User } from "../entitites/user.entity";
-import { async } from "rxjs";
+import { InjectDataSource } from "@nestjs/typeorm";
+import { DataSource, MongoRepository } from "typeorm";
+
 export interface ITokenService {
   list(userId: string): ITodo[];
   delete(todoId: string): void;

@@ -17,7 +17,7 @@ import {
 } from "@nestjs/swagger";
 import { CreateTodo, TodoResponse } from "../dtos/todo";
 import { TodoService } from "../services/todo.service";
-import { ITodo, TodoEntity } from "../entitites/todo.entity";
+import { ITodo } from "../entitites/todo.entity";
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @UseInterceptors(ClassSerializerInterceptor)

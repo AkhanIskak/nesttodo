@@ -1,5 +1,4 @@
-import {AfterLoad, Column, Entity, ManyToOne, ObjectId, ObjectIdColumn} from "typeorm";
-import { User } from "./user.entity";
+import { AfterLoad, Column, Entity, ObjectIdColumn } from "typeorm";
 
 export interface ITodo {
   name: string;
