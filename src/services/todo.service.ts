@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ITodo, TodoEntity } from "../entitites/todo.entity";
 import { InjectDataSource } from "@nestjs/typeorm";
-import { DataSource, MongoRepository } from "typeorm";
+import { DataSource, MongoRepository, ObjectId } from "typeorm";
 
 export interface ITokenService {
   list(userId: string): ITodo[];
@@ -25,5 +25,8 @@ export class TodoService {
     todo.createdAt = Math.floor(Date.now() / 1000);
     todo.user = userId;
     return this.todoRepo.save(todo);
+  }
+  async delete(todoId: string) {
+    await this.todoRepo.delete({ id: todoId });
   }
 }

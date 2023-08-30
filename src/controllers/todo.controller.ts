@@ -2,7 +2,9 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   Req,
   UseGuards,
@@ -13,6 +15,7 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiNotFoundResponse,
+  ApiParam,
   ApiResponse,
 } from "@nestjs/swagger";
 import { CreateTodo, TodoResponse } from "../dtos/todo";
@@ -36,8 +39,9 @@ export class TodoController {
     return this.todoService.list(user.userId);
   }
 
-  // @Delete(":id")
-  // deleteTodo() {
-  //   return this.todoService.delete();
-  // }
+  @Delete(":id")
+  @ApiParam({ name: "id", description: "Id of todo you want to delete" })
+  deleteTodo(@Param() params) {
+    return this.todoService.delete(params.id);
+  }
 }
