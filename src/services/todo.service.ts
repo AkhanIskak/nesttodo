@@ -1,9 +1,10 @@
 import { HttpException, Injectable } from "@nestjs/common";
 import { ITodo, TodoEntity } from "../entitites/todo.entity";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { InjectDataSource, InjectRepository } from "@nestjs/typeorm";
+import { DataSource, MongoRepository, Repository } from "typeorm";
 import { ObjectId } from "mongodb";
 import { User } from "../entitites/user.entity";
+import { async } from "rxjs";
 export interface ITokenService {
   list(userId: string): ITodo[];
   delete(todoId: string): void;
@@ -12,27 +13,19 @@ export interface ITokenService {
 }
 @Injectable()
 export class TodoService {
+  private todoRepo: MongoRepository<TodoEntity>;
   constructor(
-    @InjectRepository(User)
-    private userRepo: Repository<User>
-  ) {}
+    @InjectDataSource()
+    private mongo: DataSource
+  ) {
+    this.todoRepo = mongo.getMongoRepository(TodoEntity);
+  }
   async list(userId: string) {
-    const { todo } = await this.userRepo.findOne({
-      select: ["todo"],
-      where: { _id: new ObjectId(userId) },
-    });
-    return todo;
+    return await this.todoRepo.find({ where: { user: userId } });
   }
   async create(userId: string, todo: ITodo): Promise<ITodo> {
-    todo.createdAt = Math.floor(Date.now());
-    const user = await this.userRepo.findOne({
-      where: { _id: new ObjectId(userId) },
-    });
-    if (!user) throw new HttpException("User does not exist", 404);
-    user.todo
-      ? user.todo.push(<TodoEntity>todo)
-      : (user.todo = [<TodoEntity>todo]);
-    await this.userRepo.save(user);
-    return todo;
+    todo.createdAt = Math.floor(Date.now() / 1000);
+    todo.user = userId;
+    return this.todoRepo.save(todo);
   }
 }

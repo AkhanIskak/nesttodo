@@ -2,7 +2,7 @@ import { Column, Entity, ObjectIdColumn, OneToMany, ObjectId } from "typeorm";
 import { TodoEntity } from "./todo.entity";
 
 export interface IUser {
-  _id?: ObjectId;
+  id?: ObjectId;
   name: string;
   surname: string;
   email: string;
@@ -16,7 +16,7 @@ export interface IUser {
 @Entity("users")
 export class User implements IUser {
   @ObjectIdColumn()
-  _id: ObjectId;
+  id: ObjectId;
 
   @Column()
   name: string;
@@ -46,7 +46,4 @@ export class User implements IUser {
 
   @Column({ nullable: true })
   refreshToken: string;
-
-  @OneToMany(() => TodoEntity, (todo) => todo.user)
-  todo: TodoEntity[];
 }

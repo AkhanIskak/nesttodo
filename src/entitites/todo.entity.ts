@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, ObjectId, ObjectIdColumn } from "typeorm";
+import {AfterLoad, Column, Entity, ManyToOne, ObjectId, ObjectIdColumn} from "typeorm";
 import { User } from "./user.entity";
 
 export interface ITodo {
@@ -6,11 +6,12 @@ export interface ITodo {
   description: string;
   createdAt?: number;
   finishedAt?: number;
+  user: string;
 }
 @Entity()
 export class TodoEntity implements ITodo {
   @ObjectIdColumn()
-  _id: ObjectId;
+  id: string;
   @Column({ type: "string" })
   name: string;
   @Column({ type: "string" })
@@ -21,6 +22,11 @@ export class TodoEntity implements ITodo {
   //Unix time
   @Column() // This sets the default value to the current timestamp
   finishedAt?: number;
-  @ManyToOne(() => User, (user) => user.todo)
-  user: User;
+  @Column()
+  user: string;
+  //convert id from Object id to simple string
+  @AfterLoad()
+  convertIdToString() {
+    this.id = this.id.toString();
+  }
 }

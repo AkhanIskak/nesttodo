@@ -5,6 +5,7 @@ import { Repository } from "typeorm";
 import { InjectConfig } from "nestjs-config";
 import { AuthService } from "../auth/auth.service";
 import { AccessRefreshResponse } from "../dtos/accessToken.dto";
+import { TodoEntity } from "../entitites/todo.entity";
 
 @Injectable()
 export class UserService {
@@ -25,7 +26,7 @@ export class UserService {
     return new AccessRefreshResponse({
       accessToken: await this.authServ.createAccessToken({
         email: user.email,
-        sub: user.id,
+        sub: user._id,
       }),
     });
   }
