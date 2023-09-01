@@ -16,7 +16,7 @@ import { AuthService } from "../auth/auth.service";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { LoginDto } from "../dtos/login.dto";
-import { AccessRefreshResponse } from "../dtos/accessToken.dto";
+import { AccessResponse } from "../dtos/accessToken.dto";
 
 @ApiTags("User")
 @Controller("/user")
@@ -28,7 +28,7 @@ export class UserController {
   @HttpCode(201)
   @ApiBody({ type: CreateUserDto })
   @ApiResponse({ description: "Error Email is already taken", status: 409 })
-  @ApiResponse({ type: AccessRefreshResponse })
+  @ApiResponse({ type: AccessResponse })
   @ApiResponse({ status: 400, description: "JSON input data is wrong" })
   async registerUser(@Body() body: CreateUserDto) {
     return this.usrServ.register(body);
@@ -36,7 +36,7 @@ export class UserController {
 
   @UseGuards(LocalAuthGuard)
   @ApiBody({ type: LoginDto })
-  @ApiResponse({ type: AccessRefreshResponse })
+  @ApiResponse({ type: AccessResponse })
   @Post("/login")
   async loginUser(@Req() req) {
     return this.authService.login(req.user);

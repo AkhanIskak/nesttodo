@@ -10,7 +10,6 @@ export interface IUser {
   emailConfirmationCode?: number;
   blocked?: boolean;
   emailConfirmed?: boolean;
-  refreshToken?: string;
 }
 @Entity("users")
 export class User implements IUser {
@@ -42,7 +41,4 @@ export class User implements IUser {
 
   @Column({ default: false })
   emailConfirmed: boolean;
-
-  @Column({ nullable: true })
-  refreshToken: string;
 }

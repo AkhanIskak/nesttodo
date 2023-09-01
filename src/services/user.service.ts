@@ -4,7 +4,7 @@ import { User } from "../entitites/user.entity";
 import { Repository } from "typeorm";
 import { InjectConfig } from "nestjs-config";
 import { AuthService } from "../auth/auth.service";
-import { AccessRefreshResponse } from "../dtos/accessToken.dto";
+import { AccessResponse } from "../dtos/accessToken.dto";
 
 @Injectable()
 export class UserService {
@@ -22,7 +22,7 @@ export class UserService {
     });
     if (dublicate) throw new HttpException("Email is not unique", 409);
     const savedUser = await this.usrRepo.save(user);
-    return new AccessRefreshResponse({
+    return new AccessResponse({
       accessToken: await this.authServ.createAccessToken({
         email: savedUser.email,
         sub: savedUser.id,

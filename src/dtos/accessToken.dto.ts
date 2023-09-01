@@ -1,7 +1,7 @@
 import { Exclude, Expose } from "class-transformer";
 
 @Exclude()
-export class AccessRefreshResponse {
+export class AccessResponse {
   @Expose()
   accessToken: string;
   constructor(partial: Partial<any>) {
