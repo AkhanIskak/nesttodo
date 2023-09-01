@@ -27,7 +27,7 @@ async function bootstrap(): Promise<void> {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("api", app, document);
   app.setGlobalPrefix("api");
-  await app.listen(process.env.API_PORT, () =>
+  await app.listen(process.env.API_PORT || 3000, () =>
     console.log(`Server is listening on port ${process.env.API_PORT || 3000}`)
   );
 }
