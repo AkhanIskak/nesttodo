@@ -1,8 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ITodo, TodoEntity } from "../entitites/todo.entity";
 import { InjectDataSource } from "@nestjs/typeorm";
-import { DataSource, MongoRepository, ObjectId } from "typeorm";
-import * as console from "console";
+import { DataSource, MongoRepository } from "typeorm";
 
 export interface ITokenService {
   list(userId: string): ITodo[];
