@@ -5,14 +5,8 @@ import * as path from "path";
 import { UserModule } from "./modules/user.module";
 import { AuthModule } from "./auth/auth.module";
 import { TodoModule } from "./modules/todo.module";
-import { ServeStaticModule } from "@nestjs/serve-static";
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: path.join(__dirname, "..", "static"),
-      serveRoot: "/",
-      exclude: ["/api*"],
-    }),
     ConfigModule.load(path.resolve(__dirname, "config", "**/!(*.d).{ts,js}"), {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
