@@ -10,7 +10,7 @@ export class CreateTodo implements Partial<ITodo> {
   @ApiProperty()
   @IsString()
   name: string;
-
+  @ApiProperty()
   @Transform(() => Math.floor(Date.now() / 1000))
   createdAt: number;
 }

@@ -7,6 +7,7 @@ export interface ITodo {
   createdAt?: number;
   finishedAt?: number;
   user: string;
+  status: string;
 }
 @Entity()
 export class TodoEntity implements ITodo {
@@ -25,6 +26,8 @@ export class TodoEntity implements ITodo {
   @Column()
   user: string;
   //convert id from Object id to simple string
+  @Column({ default: "pending" })
+  status: string;
   @AfterLoad()
   convertIdToString() {
     this.id = this.id.toString();

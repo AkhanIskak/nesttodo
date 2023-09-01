@@ -21,11 +21,11 @@ export class UserService {
       where: { email: user.email },
     });
     if (dublicate) throw new HttpException("Email is not unique", 409);
-    await this.usrRepo.save(user);
+    const savedUser = await this.usrRepo.save(user);
     return new AccessRefreshResponse({
       accessToken: await this.authServ.createAccessToken({
-        email: user.email,
-        sub: user._id,
+        email: savedUser.email,
+        sub: savedUser.id,
       }),
     });
   }

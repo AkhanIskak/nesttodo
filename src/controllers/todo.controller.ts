@@ -5,6 +5,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Req,
   UseGuards,
@@ -30,7 +31,7 @@ export class TodoController {
   @Post()
   @ApiBody({ type: CreateTodo, description: "Название и описание задачи" })
   @ApiNotFoundResponse({ description: "User does not exist" })
-  createTodo(@Req() req, @Body() body: CreateTodo) {
+  createTodo(@Req() req, @Body() body) {
     return this.todoService.create(req.user.userId, <ITodo>body);
   }
   @Get()
@@ -43,5 +44,9 @@ export class TodoController {
   @ApiParam({ name: "id", description: "Id of todo you want to delete" })
   deleteTodo(@Param() params) {
     return this.todoService.delete(params.id);
+  }
+  @Patch(":id")
+  editTodo(@Req() req, @Param() params) {
+    return this.todoService.editTodo(req.body, params.id);
   }
 }

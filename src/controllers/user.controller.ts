@@ -43,7 +43,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get("/whoiam")
+  @Get("/whoami")
   @HttpCode(200)
   @ApiBearerAuth()
   async whoIam(@Req() { user }) {
