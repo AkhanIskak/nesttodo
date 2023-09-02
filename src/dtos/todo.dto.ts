@@ -14,6 +14,10 @@ export class CreateTodo implements Partial<ITodo> {
   @Transform(() => Math.floor(Date.now() / 1000))
   createdAt: number;
 }
+export class TodosQuery {
+  @ApiProperty({ description: "name of the todo" })
+  name: string;
+}
 export class TodoResponse implements Partial<ITodo> {
   @ApiProperty()
   description: string;
