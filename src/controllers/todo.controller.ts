@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Req,
   UseGuards,
   UseInterceptors,
@@ -36,8 +37,8 @@ export class TodoController {
   }
   @Get()
   @ApiResponse({ type: TodoResponse, isArray: true })
-  getTodo(@Req() { user }): Promise<ITodo[]> {
-    return this.todoService.list(user.userId);
+  getTodo(@Req() { user }, @Query() query): Promise<ITodo[]> {
+    return this.todoService.list(user.userId, query.name);
   }
 
   @Delete(":id")

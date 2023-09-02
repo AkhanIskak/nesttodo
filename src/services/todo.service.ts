@@ -24,8 +24,10 @@ export class TodoService {
     this.todoRepo = mongo.getMongoRepository(TodoEntity);
   }
 
-  async list(userId: string) {
-    return await this.todoRepo.find({ where: { user: userId } });
+  async list(userId: string, name?: string) {
+    const search: any = { user: userId };
+    if (name) search.name = name;
+    return await this.todoRepo.find({ where: search });
   }
 
   async create(userId: string, todo: ITodo): Promise<ITodo> {
